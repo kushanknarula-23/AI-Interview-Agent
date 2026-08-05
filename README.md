@@ -94,7 +94,7 @@ OPENROUTER_API_KEY=your_openrouter_api_key
 Create a `.env` file in the `client` directory:
 
 ```env
-VITE_API_BASE_URL=http://localhost:6000/api
+VITE_FIRE_BASE_URL=""
 ```
 
 ---
