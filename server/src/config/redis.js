@@ -6,3 +6,5 @@ const redis = new Redis({
 
 await redis.set("foo", "bar");
 await redis.get("foo");
+
+export default redis

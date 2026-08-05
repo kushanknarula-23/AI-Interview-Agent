@@ -2,7 +2,7 @@ import asyncHandler from "../utils/asyncHandler.js"
 import userModel from "../models/user.model.js"
 import AppError from "../utils/appError.js"
 import { getRefreshToken, getAccessToken, verifyRefreshToken } from "../utils/TokenGenerator.js"
-import redisClient from "../config/redis.js"
+import redis from "../config/redis.js"
 export const googleAuthController = asyncHandler(async (req, res) => {
     const { name, email } = req.body
 
