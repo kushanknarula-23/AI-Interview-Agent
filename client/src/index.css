@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Custom scrollbar for skill/project lists */
+#div1::-webkit-scrollbar {
+    display: none;
+}

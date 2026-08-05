@@ -1,0 +1,6 @@
+#div1::-webkit-scrollbar{
+    display: none;
+}
+#QuestionWiseInfoDiv::-webkit-scrollbar{
+    display: none;
+}
