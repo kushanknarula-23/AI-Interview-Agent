@@ -37,8 +37,7 @@ function Step1Setup({ onstart }) {
         try {
             const response = await axiosInstance.post(
                 "/api/interview/resume",
-                formData,
-                { headers: { "Content-Type": "multipart/form-data" } }
+                formData
             );
 
             const data = response.data;
