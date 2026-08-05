@@ -8,9 +8,10 @@ import InterviewRouter from "./routes/resume.routes.js"
 const app = express()
 
 // dummy api
+const allowedOrigins = [process.env.CLIENT_URL || "http://localhost:5173"];
 app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true
+    origin: allowedOrigins,
+    credentials: true,
 }))
 
 app.use(express.json())

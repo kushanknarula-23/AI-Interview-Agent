@@ -29,8 +29,8 @@ export const googleAuthController = asyncHandler(async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: true,
+        sameSite: "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000
     })
 
@@ -51,8 +51,8 @@ export const Logout = asyncHandler(async (req, res) => {
 
     res.clearCookie("refreshToken", {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: true,
+        sameSite: "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000
     })
 
@@ -90,7 +90,7 @@ export const GetNewAccesToken = asyncHandler(async (req, res) => {
 
     res.cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000
     })
