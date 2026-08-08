@@ -2,7 +2,6 @@ import asyncHandler from "../utils/asyncHandler.js"
 import userModel from "../models/user.model.js"
 import AppError from "../utils/appError.js"
 import { getRefreshToken, getAccessToken, verifyRefreshToken } from "../utils/TokenGenerator.js"
-import redis from "../config/redis.js"
 export const googleAuthController = asyncHandler(async (req, res) => {
     const { name, email } = req.body
 
@@ -23,9 +22,7 @@ export const googleAuthController = asyncHandler(async (req, res) => {
 
     const refreshToken = getRefreshToken(user._id)
 
-    await redisClient.set(`refreshToken:${user._id}`, refreshToken, {
-        EX: 7 * 24 * 60 * 60
-    })
+    
 
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
@@ -45,7 +42,7 @@ export const googleAuthController = asyncHandler(async (req, res) => {
 
 
 export const Logout = asyncHandler(async (req, res) => {
-    await redisClient.del(`refreshToken:${req.user._id}`)
+    
 
     // clear cookies
 
@@ -74,19 +71,10 @@ export const GetNewAccesToken = asyncHandler(async (req, res) => {
     if (!decoded) {
         throw new AppError("Unable to verify refresh token", 401)
     }
- 
-    const storedToken = await redisClient.get(`refreshToken:${decoded.id}`)
-
-    if (storedToken !== token) {
-        throw new AppError("Invalid refresh token", 401)
-    }
 
     const newAccessToken = getAccessToken(decoded.id)
     const newRefreshToken = getRefreshToken(decoded.id)
 
-    await redisClient.set(`refreshToken:${decoded.id}`, newRefreshToken, {
-        EX: 7 * 24 * 60 * 60
-    })
 
     res.cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
